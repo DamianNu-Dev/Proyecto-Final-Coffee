@@ -2,15 +2,17 @@
 import { StyleSheet, Platform } from 'react-native';
 
 const COLORS = {
-  primary: '#4E342E', // Café oscuro
-  secondary: '#7B3F00', // Café medio
-  accent: '#FFD700', // Dorado/acento
+  primary: '#F5E6D3', // Crema - fondo principal
+  secondary: '#4E342E', // Café oscuro - textos y elementos destacados
+  accent: '#C8A97E', // Dorado café - acentos elegantes
   background: '#FFF8F0', // Fondo cálido
-  text: '#3E2723', // Texto principal
-  muted: '#A1887F', // Texto secundario
-  inputBg: '#F5F5F5',
-  border: '#E0E0E0',
+  text: '#3E2723', // Texto principal oscuro
+  muted: '#8B7355', // Texto secundario café
+  inputBg: '#FFFFFF',
+  border: '#D4C4B0', // Borde café claro
   white: '#FFFFFF',
+  dark: '#2C1810', // Café muy oscuro para contraste
+  gold: '#B8860B', // Dorado oscuro premium
 };
 
 const FONTS = {

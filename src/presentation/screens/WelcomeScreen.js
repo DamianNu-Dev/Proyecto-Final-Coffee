@@ -4,53 +4,63 @@ import {
   Text, 
   View, 
   TouchableOpacity, 
-  Dimensions,
-  StatusBar,
-  SafeAreaView 
+  Dimensions, 
+  Image,
+  SafeAreaView,
+  StatusBar
 } from 'react-native';
-import { COLORS, FONTS, GLOBAL_STYLES } from '../styles/global-styles';
+import { COLORS } from '../styles/global-styles';
 
 const { width, height } = Dimensions.get('window');
 
-export default function WelcomeScreen({ onGetStarted }) {
+export default function WelcomeScreen({ onGetStarted, onCreateAccount }) {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor={COLORS.primary} />
-      <View style={styles.container}>
-        {/* Header Section */}
-        <View style={styles.headerSection}>
-          <View style={styles.logoContainer}>
-            <Text style={styles.logoIcon}>☕</Text>
-            <View style={styles.logoGlow} />
-          </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" backgroundColor={COLORS.primary} />
+      
+      <View style={styles.content}>
+        {/* Branding Superior */}
+        <View style={styles.header}>
+          <Text style={styles.brandName}>CUERNO NEGRO</Text>
+          <View style={styles.brandDot} />
         </View>
 
-        {/* Content Section */}
-        <View style={styles.contentSection}>
-          <Text style={styles.welcomeText}>Bienvenido a</Text>
-          <Text style={styles.brandName}>Cuerno Negro</Text>
-          <View style={styles.divider} />
-          <Text style={styles.tagline}>Saborea. Sonríe. Crea.</Text>
-          <Text style={styles.description}>
-            Descubre la mejor experiencia de café hecha especialmente para ti
+        {/* Imagen Central - Sustituimos emojis por un componente visual limpio */}
+        <View style={styles.imageContainer}>
+          <View style={styles.imageBackgroundCircle} />
+          {/* Imagen de café de alta calidad */}
+          <Image 
+            source={{ uri: 'https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970_1280.jpg' }} 
+            style={styles.mainImage}
+            resizeMode="cover"
+          />
+        </View>
+
+        {/* Mensaje de Bienvenida con UX Focus */}
+        <View style={styles.textContainer}>
+          <Text style={styles.mainTitle}> Tu dosis diaria de perfección </Text>
+          <Text style={styles.subtitle}>
+            Vive el arte del café desde la comodidad de tu hogar.
           </Text>
         </View>
 
-        {/* Footer Section */}
-        <View style={styles.footerSection}>
+        {/* Botones Profesionales */}
+        <View style={styles.footer}>
           <TouchableOpacity 
-            style={styles.button} 
+            style={styles.primaryButton} 
             onPress={onGetStarted}
             activeOpacity={0.9}
           >
             <Text style={styles.buttonText}>Comenzar</Text>
           </TouchableOpacity>
-          
-          <View style={styles.dotsContainer}>
-            <View style={[styles.dot, styles.dotActive]} />
-            <View style={styles.dot} />
-            <View style={styles.dot} />
-          </View>
+
+          <TouchableOpacity 
+            style={styles.secondaryButton} 
+            onPress={onCreateAccount}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.secondaryButtonText}>Crear una cuenta</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -58,127 +68,106 @@ export default function WelcomeScreen({ onGetStarted }) {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: COLORS.primary,
-  },
   container: {
     flex: 1,
-    backgroundColor: COLORS.primary,
-    alignItems: 'center',
+    backgroundColor: COLORS.primary, // Fondo café global
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 30,
     justifyContent: 'space-between',
-    paddingVertical: 40,
-    paddingHorizontal: 24,
+    paddingVertical: 20,
   },
-  headerSection: {
-    flex: 1,
+  header: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logoContainer: {
-    width: 180,
-    height: 180,
-    borderRadius: 90,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  logoIcon: {
-    fontSize: 100,
-    textAlign: 'center',
-  },
-  logoGlow: {
-    position: 'absolute',
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    backgroundColor: 'rgba(255, 215, 0, 0.1)',
-    zIndex: -1,
-  },
-  contentSection: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  welcomeText: {
-    fontSize: 18,
-    color: COLORS.white,
-    opacity: 0.8,
-    letterSpacing: 2,
-    textTransform: 'uppercase',
-    marginBottom: 8,
+    marginTop: 30,
   },
   brandName: {
-    fontSize: 44,
-    fontWeight: 'bold',
-    color: COLORS.white,
-    fontFamily: FONTS.cursive,
-    textAlign: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.3)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
+    marginTop: 30,
+    fontSize: 26,
+    fontWeight: '900',
+    color: COLORS.secondary,
+    letterSpacing: 5,
   },
-  divider: {
-    width: 60,
-    height: 3,
+  brandDot: {
+    width: 6,
+    height: 6,
     backgroundColor: COLORS.accent,
-    marginVertical: 20,
-    borderRadius: 2,
+    borderRadius: 3,
+    marginLeft: 4,
   },
-  tagline: {
-    fontSize: 20,
-    color: COLORS.accent,
-    fontWeight: '600',
-    marginBottom: 12,
-    letterSpacing: 1,
-  },
-  description: {
-    fontSize: 15,
-    color: COLORS.white,
-    opacity: 0.7,
-    textAlign: 'center',
-    lineHeight: 22,
-    paddingHorizontal: 20,
-  },
-  footerSection: {
-    width: '100%',
+  imageContainer: {
     alignItems: 'center',
-    paddingBottom: 20,
+    justifyContent: 'center',
+    height: height * 0.35,
   },
-  button: {
-    width: width * 0.85,
-    height: 56,
-    backgroundColor: COLORS.white,
-    borderRadius: 28,
+  imageBackgroundCircle: {
+    position: 'absolute',
+    width: width * 0.75,
+    height: width * 0.75,
+    backgroundColor: 'rgba(78, 52, 46, 0.08)',
+    borderRadius: width * 0.375,
+  },
+  mainImage: {
+    width: width * 0.8,
+    height: width * 0.8,
+  },
+  textContainer: {
+    alignItems: 'center',
+  },
+  mainTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: COLORS.secondary,
+    textAlign: 'center',
+    lineHeight: 34,
+    marginBottom: 15,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: COLORS.muted, // Usamos muted del global-styles
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    lineHeight: 24,
+  },
+  footer: {
+    width: '100%',
+    gap: 15,
+    marginBottom: 40,
+  },
+  primaryButton: {
+    backgroundColor: COLORS.secondary,
+    height: 58,
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
+    shadowColor: COLORS.secondary,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
     shadowRadius: 8,
-    elevation: 8,
+    elevation: 10,
   },
   buttonText: {
+    color: COLORS.white,
     fontSize: 18,
     fontWeight: 'bold',
-    color: COLORS.primary,
     letterSpacing: 1,
   },
-  dotsContainer: {
-    flexDirection: 'row',
-    marginTop: 24,
-    gap: 8,
+  secondaryButton: {
+    height: 58,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: COLORS.secondary,
+    backgroundColor: 'transparent',
   },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-  },
-  dotActive: {
-    backgroundColor: COLORS.accent,
-    width: 24,
+  secondaryButtonText: {
+    color: COLORS.secondary,
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
 });
